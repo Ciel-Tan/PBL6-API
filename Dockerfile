@@ -1,5 +1,5 @@
-# Use OpenJDK as the base image
-FROM openjdk:17-jdk-slim
+# Use OpenJDK 19 as the base image
+FROM openjdk:19-jdk-slim
 
 # Set the working directory
 WORKDIR /app
