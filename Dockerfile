@@ -1,28 +1,22 @@
-# Use OpenJDK 19 as the base image
-FROM openjdk:19-jdk-slim
-
-# Set the working directory
+# Importing JDK and copying required files
+FROM openjdk:19-jdk AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src src
 
-# Copy the Maven wrapper and pom.xml
+# Copy Maven wrapper
 COPY mvnw .
 COPY .mvn .mvn
-COPY pom.xml .
 
-# Ensure the Maven wrapper is executable
-RUN chmod +x mvnw
-
-# Install dependencies
-RUN ./mvnw dependency:go-offline -B
-
-# Copy the entire source code
-COPY src ./src
-
-# Build the application
+# Set execution permission for the Maven wrapper
+RUN chmod +x ./mvnw
 RUN ./mvnw clean package -DskipTests
 
-# Copy the built JAR file to the final image
-COPY target/*.jar app.jar
+# Stage 2: Create the final Docker image using OpenJDK 19
+FROM openjdk:19-jdk
+VOLUME /tmp
 
-# Specify the command to run the application
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+# Copy the JAR from the build stage
+COPY --from=build /app/target/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+EXPOSE 8080
