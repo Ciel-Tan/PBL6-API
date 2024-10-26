@@ -1,0 +1,27 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="6" author="nvhuy">
+        <createTable tableName="exercise_attribute">
+            <column autoIncrement="true" name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="exercise_id" type="integer"/>
+            <column name="attribute_id" type="integer"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="exercise_attribute"
+                                 baseColumnNames="exercise_id"
+                                 constraintName="fk_exercise_attribute_exercise"
+                                 referencedTableName="exercise"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="exercise_attribute"
+                                 baseColumnNames="attribute_id"
+                                 constraintName="fk_exercise_attribute_attribute"
+                                 referencedTableName="attribute"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

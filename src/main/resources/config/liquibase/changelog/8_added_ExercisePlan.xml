@@ -1,0 +1,30 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="8" author="nvhuy">
+        <createTable tableName="exercise_plan">
+            <column autoIncrement="true" name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="time" type="datetime"/>
+            <column name="set_count" type="integer"/>
+            <column name="rep_count" type="integer"/>
+            <column name="exercise_id" type="integer"/>
+            <column name="plan_id" type="integer"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="exercise_plan"
+                                 baseColumnNames="exercise_id"
+                                 constraintName="fk_exercise_plan_exercise"
+                                 referencedTableName="exercise"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="exercise_plan"
+                                 baseColumnNames="plan_id"
+                                 constraintName="fk_exercise_plan_plan"
+                                 referencedTableName="plan"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,26 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2" author="nvhuy">
+        <createTable tableName="user_attribute">
+            <column autoIncrement="true" name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="is_focus" type="boolean"/>
+            <column name="measure" type="double"/>
+            <column name="measure_goal" type="double"/>
+            <column name="unit" type="varchar(255)"/>
+            <column name="user_id" type="integer"/>
+            <column name="attribute_id" type="integer"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="user_attribute"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_user_attribute_user"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

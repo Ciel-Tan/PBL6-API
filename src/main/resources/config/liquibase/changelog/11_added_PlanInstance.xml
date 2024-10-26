@@ -1,0 +1,24 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="11" author="nvhuy">
+        <createTable tableName="plan_instance">
+            <column autoIncrement="true" name="id" type="integer">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="description" type="varchar(255)"/>
+            <column name="status" type="varchar(255)"/>
+            <column name="total_days" type="integer"/>
+            <column name="plan_id" type="integer"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="plan_instance"
+                                 baseColumnNames="plan_id"
+                                 constraintName="fk_plan_instance_plan"
+                                 referencedTableName="plan"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

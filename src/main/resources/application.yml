@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: homeworkoutapplication
+  datasource:
+    url: jdbc:mysql://localhost:3306/homeworkoutapplication?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&createDatabaseIfNotExist=true
+    username: root
+    password:
+  liquibase:
+    change-log: classpath:config/liquibase/master.xml
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: nvanhuy13257@gmail.com
+    password: simi mfiz qkol kirk
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+springdoc:
+  show-actuator: true
+  api-docs:
+    path: /authentication-service/v3/api-docs
+app:
+  activation:
+    url: http://localhost:8080/api/activate
